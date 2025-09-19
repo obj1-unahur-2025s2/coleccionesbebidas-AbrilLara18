@@ -1,32 +1,69 @@
 import tito.*
 
 describe "test de tito" {
-
-    method initialize() {
-        tito.consumir(5,wisky)
-    }
-
-    method consumoTerere() {
-        tito.consumir(5,terere)
-    }
-
-
-    test "tito tiene peso 70" {
-        assert.equals(70,tito.peso())
-    }
-
-    test "la velocidad de tito es " {
-        assert.equals(0.9**5*490/70,tito.velocidad())
-    }
-
-    test "ahora la velocidad es 7 porque consumio terere" {
-        self.consumoTerere()
-        assert.equals(7,tito.velocidad())
-    }
-
-    test "si consume cianuro la velocidad es cero porque muere" {
-        tito.consumir(5, cianuro)
-        assert.equals(0,tito.velocidad())
-    }
-
+  method initialize() {
+    tito.consumir(5, wisky)
+  }
+  
+  method consumoTerere() {
+    tito.consumir(5, terere)
+  }
+  
+  test "tito tiene peso 70" {
+    assert.equals(70, tito.peso())
+  }
+  
+  test "la velocidad de tito es " {
+    assert.equals(((0.9 ** 5) * 490) / 70, tito.velocidad())
+  }
+  
+  test "ahora la velocidad es 7 porque consumio terere" {
+    self.consumoTerere()
+    assert.equals(7, tito.velocidad())
+  }
+  
+  test "si consume cianuro la velocidad es cero porque muere" {
+    tito.consumir(5, cianuro)
+    assert.equals(0, tito.velocidad())
+  }
+  
+  test "el coctel tiene un licuado, luego se agrega leche(50) al licuado y el rendimiento del coctel por 1000cm3 le aporta a tito de velocidad" {
+    coctel.agregarBebida(licuado)
+    licuado.agregarNutrientes(50)
+    tito.consumir(1000, coctel)
+    assert.equals(420, tito.velocidad())
+  }
+  
+  /*  ENTRA EN BUCLE CONSTANTE test "el coctel incluye agua saborizada con coctel toma 60 y la velocidad de tito es" {
+  aguaSaborizada.cambiarMezcla(coctel)
+  coctel.agregarBebida(aguaSaborizada)
+  tito.consumir(60, coctel)
+    assert.equals(316.75, tito.velocidad())
+  }*/
+  
+  test "se mezcla el wisky con el agua saborizada y luego se agregar al coctel wisky y el agua saborizada, toma 50 y la velocidad de tito es" {
+  aguaSaborizada.cambiarMezcla(wisky)
+  coctel.agregarBebida(aguaSaborizada)
+  coctel.agregarBebida(wisky)
+  tito.consumir(50, coctel)
+    assert.equals(1.3615, tito.velocidad())
+  }
+  
+  test "si consume agua saborizada con terere toma 30 y la velocidad de tito es " {
+    aguaSaborizada.cambiarMezcla(terere)
+    tito.consumir(30, aguaSaborizada)
+    assert.equals(164.5, tito.velocidad())
+  }
+  
+  test "si consume licuado con solo frutillas(10) toma 1000 y la velocidad de tito es " {
+    tito.consumir(1000, licuado)
+    assert.equals(70, tito.velocidad())
+  }
+  
+  test "si consume coctel con wisky y licuado toma 1000 y la velocidad de tito es " {
+  coctel.agregarBebida(licuado)
+  coctel.agregarBebida(wisky)
+  tito.consumir(1000, coctel)
+  assert.equals(0, tito.velocidad())
+  }
 }

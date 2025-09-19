@@ -28,3 +28,42 @@ object terere {
         //tambien (cantidad * 0.1).max(1)
     }
 }
+
+object licuado {
+    const nutrientes=[10]
+  method rendimiento(cantidad){
+    if (cantidad/1000 >0){
+        return nutrientes.sum()
+    }
+    else{
+        return 0
+    }
+  }
+  method agregarNutrientes(num){
+    nutrientes.add(num)
+  }
+}
+
+object aguaSaborizada {
+    var bebidaMezclada=wisky
+  method  rendimiento(cantidad) {
+    return ((cantidad*3)/4)+bebidaMezclada.rendimiento(cantidad/4)
+  } 
+  method cambiarMezcla(bebida) {
+    bebidaMezclada=bebida
+  }
+}
+
+object coctel {
+  const bebidasUnidas=[]
+  method rendimiento(cantidad){
+    var rendimientoTotal=1
+    bebidasUnidas.forEach({bebida => 
+    rendimientoTotal*=bebida.rendimiento(cantidad)
+    })
+    return rendimientoTotal
+  }
+  method agregarBebida(bebida) {
+    bebidasUnidas.add(bebida)
+  }
+}
